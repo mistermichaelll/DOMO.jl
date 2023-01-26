@@ -2,8 +2,8 @@ import JuDOMO: match_domo_types, create_dataset_schema
 import JSON: json
 
 ## test sets for matching Julia's types to Domo's
-types = [Int32, Int64, Float32, Float64, String]
-expected_types = ["DOUBLE", "DOUBLE", "DECIMAL", "DECIMAL", "STRING"]
+types = [Int32, Int64, Float32, Float64, String, Dates.Date, Dates.DateTime]
+expected_types = ["LONG", "LONG", "DOUBLE", "DOUBLE", "STRING", "DATE", "DATETIME"]
 
 ## test sets for schema creation
 schema_test_mathematicians = Dict(
