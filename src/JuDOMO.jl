@@ -8,6 +8,7 @@ import JSON: parse, json
 import Base64: base64encode
 import DataFrames: nrow, ncol
 import CSV: write
+using Dates
 
 export DOMO_auth
 export create_dataset
