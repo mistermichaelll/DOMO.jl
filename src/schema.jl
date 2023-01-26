@@ -4,6 +4,8 @@ function match_domo_types(type::DataType)
         "STRING"
     elseif type == Int64
         "DOUBLE"
+    elseif type == Float64
+        "DECIMAL"
     end
 end
 
