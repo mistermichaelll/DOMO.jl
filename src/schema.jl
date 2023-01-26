@@ -11,7 +11,7 @@ end
 
 # function to set up the dataset schema from a dataframe in the proper format for pushing
 #  the result to Domo.
-function create_dataset_schema(df::DataFrame, name, description)
+function create_dataset_schema(df, name, description)
     column_schema = Dict(
         "columns" => map(1:ncol(df)) do column
             Dict(
