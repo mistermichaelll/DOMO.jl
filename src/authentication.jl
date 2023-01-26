@@ -1,5 +1,3 @@
-include("utils.jl")
-
 function create_basic_auth_header(client_id::String, client_secret::String)
     ["Authorization" => "Basic " * base64encode(client_id * ":" * client_secret)]
 end

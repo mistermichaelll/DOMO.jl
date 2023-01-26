@@ -1,5 +1,5 @@
 # function which parses the body of an HTTP response into a dictionary object.
-function parse_HTTP_response(http_response::Response)
+function parse_HTTP_response(http_response)
     parse(
         String(http_response.body)
     )

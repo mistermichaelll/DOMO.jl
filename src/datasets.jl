@@ -1,7 +1,6 @@
 include("schema.jl")
-include("utils.jl")
 
-function create_dataset(df::DataFrame; name::String = "", description::String = "")
+function create_dataset(df; name::String = "", description::String = "")
     if !(@isdefined domo)
         error("Please run the DOMO_auth() function to generate an access token.")
     end
@@ -28,7 +27,7 @@ function create_dataset(df::DataFrame; name::String = "", description::String = 
     println("Dataset uploaded to Domo: ID is" * pushed_schema["id"])
 end
 
-function replace_dataset(dataset_id::String, df::DataFrame)
+function replace_dataset(dataset_id::String, df)
     if !(@isdefined domo)
         error("Please run the DOMO_auth() function to generate an access token.")
     end
