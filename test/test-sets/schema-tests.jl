@@ -1,5 +1,6 @@
 import JuDOMO: match_domo_types, create_dataset_schema
 import JSON: json
+import DataFrames: DataFrame
 using Dates
 
 ## test sets for matching Julia's types to Domo's
