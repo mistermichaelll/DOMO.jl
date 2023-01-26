@@ -11,7 +11,7 @@ include("test-sets/schema-tests.jl")
         "Mathematician guest list."
     ) == schema_test_mathematicians
     # test whether types match
-    #  (note that mapping here can give a more helpful error)
+    #  (note that mapping here runs multiple tests)
     map(1:length(types)) do a
         @test match_domo_types(types[a]) == expected_types[a]
     end
