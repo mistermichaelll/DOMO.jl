@@ -1,4 +1,6 @@
 module JuDOMO
+include("authentication.jl")
+include("datasets.jl")
 
 import HTTP: Response, request, iserror
 import JSON: parse, json
