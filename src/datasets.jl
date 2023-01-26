@@ -6,7 +6,7 @@ function create_dataset(df; name::String = "", description::String = "")
     end
 
     if isempty(name)
-        @warn "Dataset will be created without a name."
+        @error "Dataset cannot be created without a name."
     end
 
     if isempty(description)
