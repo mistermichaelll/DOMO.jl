@@ -27,7 +27,7 @@ function create_dataset(df; name::String = "", description::String = "")
 
     data_response = PUT_data(data, pushed_schema["id"], access_token)
 
-    println("Dataset uploaded to Domo: ID is" * pushed_schema["id"])
+    println("Dataset uploaded to Domo: ID is " * pushed_schema["id"])
 end
 
 function replace_dataset(dataset_id::String, df)
