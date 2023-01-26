@@ -20,7 +20,7 @@ function create_dataset(df; name::String = "", description::String = "")
 
     io = IOBuffer()
     write(io, df; newline = "\n", writeheader = false)
-    data = String(io.data)
+    data = String(io.data) |> replace("\n\0\0\0\0\0\0" => "")
 
     data_response = PUT_data(data, pushed_schema["id"], access_token)
 
@@ -36,7 +36,7 @@ function replace_dataset(dataset_id::String, df)
 
     io = IOBuffer()
     write(io, df; newline = "\n", writeheader = false, append = false)
-    data = String(io.data)
+    data = String(io.data) |> replace("\n\0\0\0\0\0\0" => "")
 
     response = PUT_data(data, dataset_id, access_token)
 
