@@ -2,9 +2,9 @@
 function match_domo_types(type::DataType)
     if type == String # yes, I will expand this eventually...;)
         "STRING"
-    elseif type == Int64
+    elseif type == [Int64, Int32]
         "DOUBLE"
-    elseif type == Float64
+    elseif type in [Float64, Float32]
         "DECIMAL"
     end
 end
