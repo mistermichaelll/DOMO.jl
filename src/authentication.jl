@@ -1,6 +1,3 @@
-import HTTP: Response, request, iserror
-import JSON: parse
-import Base64: base64encode
 include("utils.jl")
 
 function create_basic_auth_header(client_id::String, client_secret::String)
