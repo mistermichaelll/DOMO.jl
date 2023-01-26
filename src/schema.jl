@@ -2,6 +2,8 @@
 function match_domo_types(type::DataType)
     if type == String # yes, I will expand this eventually...;)
         "STRING"
+    elseif type == Int64
+        "DOUBLE"
     end
 end
 
@@ -25,4 +27,18 @@ function create_dataset_schema(df::DataFrame, name, description)
     )
 
     json(schema)
+end
+
+## send the schema to Domo.
+function push_schema_to_domo(dataset_schema)
+    request(
+        "POST",
+        "https://api.domo.com/v1/datasets",
+        [
+            "Content-Type" => "application/json",
+            "Accept" => "application/json",
+            "Authorization" => "bearer " * domo["access_token"]
+        ],
+        dataset_schema
+    )
 end
