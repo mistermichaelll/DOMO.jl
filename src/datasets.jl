@@ -7,11 +7,11 @@ function create_dataset(df::DataFrame; name::String = "", description::String = 
     end
 
     if isempty(name)
-        warn("Dataset will be created without a name.")
+        @warn "Dataset will be created without a name."
     end
 
     if isempty(description)
-        warn("Dataset will be created without a description.")
+        @warn "Dataset will be created without a description."
     end
 
     access_token = domo["access_token"]
