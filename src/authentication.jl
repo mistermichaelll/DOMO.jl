@@ -5,8 +5,8 @@ function create_basic_auth_header(client_id::String, client_secret::String)
 end
 
 function DOMO_auth(client_id::String, client_secret::String)
-     # this likely would never happen since providing nothing will throw a
-     #  method error...and I doubt someone would pass an empty string...but you never know.
+     # this likely would never happen since providing nothing will throw a method error...
+     #  and I doubt someone would pass an empty string here...but you never know.
     if isempty(client_id) | isempty(client_secret)
         error("Missing client keys - if you don't have them, create them here: https://developer.domo.com/new-client")
     end
