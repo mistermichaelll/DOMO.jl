@@ -16,7 +16,9 @@ types = [
     Union{Int32, Missing},
     Union{Float64, Missing},
     Union{Float32, Missing},
-    Union{String, Missing}
+    Union{String, Missing},
+    Union{Dates.Date, Missing},
+    Union{Dates.DateTime, Missing}
 ]
 
 expected_types = [
@@ -31,7 +33,9 @@ expected_types = [
     "LONG",
     "DOUBLE",
     "DOUBLE",
-    "STRING"
+    "STRING",
+    "DATE",
+    "DATETIME"
 ]
 
 ## test sets for schema creation
