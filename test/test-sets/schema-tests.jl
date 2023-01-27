@@ -4,8 +4,35 @@ import DataFrames: DataFrame
 using Dates
 
 ## test sets for matching Julia's types to Domo's
-types = [Int32, Int64, Float32, Float64, String, Dates.Date, Dates.DateTime]
-expected_types = ["LONG", "LONG", "DOUBLE", "DOUBLE", "STRING", "DATE", "DATETIME"]
+types = [
+    Int32,
+    Int64,
+    Float32,
+    Float64,
+    String,
+    Dates.Date,
+    Dates.DateTime,
+    Union{Int64, Missing},
+    Union{Int32, Missing},
+    Union{Float64, Missing},
+    Union{Float32, Missing},
+    Union{String, Missing}
+]
+
+expected_types = [
+    "LONG",
+    "LONG",
+    "DOUBLE",
+    "DOUBLE",
+    "STRING",
+    "DATE",
+    "DATETIME",
+    "LONG",
+    "LONG",
+    "DOUBLE",
+    "DOUBLE",
+    "STRING"
+]
 
 ## test sets for schema creation
 schema_test_mathematicians = Dict(
