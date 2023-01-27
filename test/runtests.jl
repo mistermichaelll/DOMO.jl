@@ -9,6 +9,12 @@ include("test-sets/schema-tests.jl")
         "Leonhard Euler Party",
         "Mathematician guest list."
     ) == schema_test_mathematicians
+    # test whether schema accounts for nulls
+    @test create_dataset_schema(
+        null_schema_test_df,
+        "The Crows Outside My Apartment",
+        "A partial list of friends."
+    ) == schema_test_nulls
     # test whether types match
     #  (note that mapping here runs multiple tests)
     map(1:length(types)) do type
