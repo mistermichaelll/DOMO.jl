@@ -1,4 +1,4 @@
-using JuDOMO
+using DOMO
 using Test
 include("test-sets/schema-tests.jl")
 

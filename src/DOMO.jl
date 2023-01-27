@@ -1,4 +1,4 @@
-module JuDOMO
+module DOMO
 include("authentication.jl")
 include("datasets.jl")
 include("utils.jl")

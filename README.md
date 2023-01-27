@@ -1,5 +1,5 @@
-# JuDOMO
-JuDOMO is a Julia interface to the Domo API.
+# DOMO.jl
+DOMO.jl is a Julia interface to the Domo API.
 
 The long-term vision is to create a package which mimics the functionality of the (seemingly-abandoned) DomoR package in Julia.
 
@@ -10,7 +10,7 @@ Install the package from GitHub via `Pkg`.
 
 ```julia
 julia> ]
-pkg> add "https://github.com/mistermichaelll/JuDOMO.jl"
+pkg> add "https://github.com/mistermichaelll/DOMO.jl"
 ```
 
 ## Using the Package
@@ -20,7 +20,7 @@ You will need a `client_id` and a `client_secret` from the Domo Developer Portal
 You can get up and running with an access token by using the `DOMO_auth()` function. This function sets a global variable called `domo` accessible by the package's internal functions.
 
 ```julia
-using JuDOMO
+using DOMO
 
 DOMO_auth(client_id, client_secret)
 #> Authentication complete.
@@ -32,7 +32,7 @@ Right now, not a ton... 😅 but you can create and replace datasets straight fr
 ```julia
 using CSV
 using DataFrames
-using JuDOMO
+using DOMO
 
 url = "https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv"
 mtcars = CSV.read(download(url), DataFrame)
@@ -49,4 +49,4 @@ create_dataset(
 ```
 
 
-[![Build Status](https://github.com/mistermichaelll/JuDOMO.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/mistermichaelll/JuDOMO.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Build Status](https://github.com/mistermichaelll/DOMO.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/mistermichaelll/DOMO.jl/actions/workflows/CI.yml?query=branch%3Amain)
