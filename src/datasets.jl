@@ -6,7 +6,7 @@ function create_dataset(df; name::String = "", description::String = "")
     end
 
     if isempty(name)
-        @warn "Dataset will be created without a name."
+        error("Dataset cannot be created without a name.")
     end
 
     if isempty(description)
@@ -20,11 +20,14 @@ function create_dataset(df; name::String = "", description::String = "")
 
     io = IOBuffer()
     write(io, df; newline = "\n", writeheader = false)
-    data = String(io.data)
+    data = replace(
+        String(io.data),
+        "\n\0\0\0\0\0\0" => ""
+    )
 
-    data_response = PUT_data(data, pushed_schema["id"], access_token)
+    response = PUT_data(data, pushed_schema["id"], access_token)
 
-    println("Dataset uploaded to Domo: ID is" * pushed_schema["id"])
+    println("Dataset uploaded to Domo: ID is " * pushed_schema["id"])
 end
 
 function replace_dataset(dataset_id::String, df)
@@ -36,7 +39,10 @@ function replace_dataset(dataset_id::String, df)
 
     io = IOBuffer()
     write(io, df; newline = "\n", writeheader = false, append = false)
-    data = String(io.data)
+    data = replace(
+        String(io.data),
+        "\n\0\0\0\0\0\0" => ""
+    )
 
     response = PUT_data(data, dataset_id, access_token)
 

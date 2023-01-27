@@ -1,11 +1,16 @@
 # function to match Julia's types to Domo's
+#  according to Docs, accepted values are STRING, DECIMAL, LONG, DOUBLE, DATE, and DATETIME.
 function match_domo_types(type::DataType)
     if type == String # yes, I will expand this eventually...;)
         "STRING"
-    elseif type == Int64
+    elseif type in [Int64, Int32]
+        "LONG"
+    elseif type in [Float64, Float32]
         "DOUBLE"
-    elseif type == Float64
-        "DECIMAL"
+    elseif type == Dates.Date
+        "DATE"
+    elseif type == Dates.DateTime
+        "DATETIME"
     end
 end
 
