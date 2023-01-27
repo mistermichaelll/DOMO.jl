@@ -2,7 +2,7 @@ using JuDOMO
 using Test
 include("test-sets/schema-tests.jl")
 
-@testset "JuDOMO.jl" begin
+@testset "Schemas" begin
     # test whether create_dataset_schema() creates the correct structure on a simple dataset
     @test create_dataset_schema(
         schema_test_mathematicians_dataset,
@@ -20,4 +20,4 @@ include("test-sets/schema-tests.jl")
     map(1:length(types)) do type
         @test match_domo_types(types[type]) == expected_types[type]
     end
-end
+end;
