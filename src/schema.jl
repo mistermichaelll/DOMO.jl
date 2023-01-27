@@ -1,15 +1,15 @@
 # function to match Julia's types to Domo's
 #  according to Docs, accepted values are STRING, DECIMAL, LONG, DOUBLE, DATE, and DATETIME.
 function match_domo_types(type)
-    if type == String | type == Union{String, Missing}
+    if type == String || type == Union{String, Missing}
         "STRING"
-    elseif type in [Int64, Int32] | type in [Union{Int64, Missing}, Union{Int32, Missing}]
+    elseif type in [Int64, Int32] || type in [Union{Int64, Missing}, Union{Int32, Missing}]
         "LONG"
-    elseif type in [Float64, Float32] | type in [Union{Float64, Missing}, Union{Float32, Missing}]
+    elseif type in [Float64, Float32] || type in [Union{Float64, Missing}, Union{Float32, Missing}]
         "DOUBLE"
-    elseif type == Dates.Date | type == Union{Dates.Date, Missing}
+    elseif type == Dates.Date || type == Union{Dates.Date, Missing}
         "DATE"
-    elseif type == Dates.DateTime | type == Union{Dates.Date, Missing}
+    elseif type == Dates.DateTime || type == Union{Dates.Date, Missing}
         "DATETIME"
     end
 end
