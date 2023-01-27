@@ -9,7 +9,7 @@ function match_domo_types(type)
         "DOUBLE"
     elseif type == Dates.Date || type == Union{Dates.Date, Missing}
         "DATE"
-    elseif type == Dates.DateTime || type == Union{Dates.Date, Missing}
+    elseif type == Dates.DateTime || type == Union{Dates.DateTime, Missing}
         "DATETIME"
     end
 end
