@@ -6,7 +6,7 @@ include("utils.jl")
 import HTTP: request, iserror
 import JSON: parse, json
 import Base64: base64encode
-import DataFrames: nrow, ncol
+import DataFrames: nrow, ncol, rownumber, eachrow
 import CSV: write
 using Dates
 

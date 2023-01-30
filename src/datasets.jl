@@ -18,12 +18,7 @@ function create_dataset(df; name::String = "", description::String = "")
     schema = create_dataset_schema(df, name, description)
     pushed_schema = push_schema_to_domo(schema) |> parse_HTTP_response
 
-    io = IOBuffer()
-    write(io, df; newline = "\n", writeheader = false)
-    data = replace(
-        String(io.data),
-        "\n\0\0\0\0\0\0" => ""
-    )
+    data = create_csv_structure(df)
 
     response = PUT_data(data, pushed_schema["id"], access_token)
 

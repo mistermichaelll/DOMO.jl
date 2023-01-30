@@ -36,6 +36,24 @@ function create_dataset_schema(df, name, description)
     json(schema)
 end
 
+## create csv structure for dataset to be sent to Domo.
+function create_csv_structure(df)
+    csv_data = ""
+    for row in eachrow(df), col_num in 1:ncol(df)
+        if col_num < ncol(df) && rownumber(row) < nrow(df)
+            csv_data = csv_data * string(row[col_num]) * ","
+        elseif col_num == ncol(df) && rownumber(row) < nrow(df)
+            csv_data = csv_data * (string(row[col_num]) * "\\n")
+        elseif col_num < ncol(df) && rownumber(row) == nrow(df)
+            csv_data = csv_data * (string(row[col_num]) * ",")
+        elseif col_num == ncol(df) && rownumber(row) == nrow(df)
+            csv_data = csv_data * string(row[col_num])
+        end
+    end
+
+    return csv_data
+end
+
 ## send the schema to Domo.
 function push_schema_to_domo(dataset_schema)
     request(
