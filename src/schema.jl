@@ -43,23 +43,23 @@ function create_csv_structure(df)
     for row in eachrow(df), col_num in 1:ncol(df)
         if col_num < ncol(df) && rownumber(row) < nrow(df)
             csv_data = csv_data * string(
-                if ismissing(row[col_num]) "" else row[col_num] end
+                ifelse(ismissing(row[col_num]), "", row[col_num])
             ) * ","
         elseif col_num == ncol(df) && rownumber(row) < nrow(df)
             csv_data = csv_data * (
                 string(
-                    if ismissing(row[col_num]) "" else row[col_num] end
+                    ifelse(ismissing(row[col_num]), "", row[col_num])
                 ) * "\n"
             )
         elseif col_num < ncol(df) && rownumber(row) == nrow(df)
             csv_data = csv_data * (
                 string(
-                    if ismissing(row[col_num]) "" else row[col_num] end
+                    ifelse(ismissing(row[col_num]), "", row[col_num])
                 ) * ","
             )
         elseif col_num == ncol(df) && rownumber(row) == nrow(df)
             csv_data = csv_data * string(
-                if ismissing(row[col_num]) "" else row[col_num] end
+                ifelse(ismissing(row[col_num]), "", row[col_num])
             ) * "\n"
         end
     end
