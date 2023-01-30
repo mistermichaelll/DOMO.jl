@@ -39,6 +39,7 @@ end
 ## create csv structure for dataset to be sent to Domo.
 function create_csv_structure(df)
     csv_data = ""
+
     for row in eachrow(df), col_num in 1:ncol(df)
         if col_num < ncol(df) && rownumber(row) < nrow(df)
             csv_data = csv_data * string(
