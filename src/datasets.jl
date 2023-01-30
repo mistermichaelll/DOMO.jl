@@ -32,12 +32,7 @@ function replace_dataset(dataset_id::String, df)
 
     access_token = domo["access_token"]
 
-    io = IOBuffer()
-    write(io, df; newline = "\n", writeheader = false, append = false)
-    data = replace(
-        String(io.data),
-        "\n\0\0\0\0\0\0" => ""
-    )
+    data = create_csv_structure(df)
 
     response = PUT_data(data, dataset_id, access_token)
 
