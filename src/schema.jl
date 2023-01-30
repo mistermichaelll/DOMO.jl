@@ -41,13 +41,25 @@ function create_csv_structure(df)
     csv_data = ""
     for row in eachrow(df), col_num in 1:ncol(df)
         if col_num < ncol(df) && rownumber(row) < nrow(df)
-            csv_data = csv_data * string(row[col_num]) * ","
+            csv_data = csv_data * string(
+                if ismissing(row[col_num]) "" else row[col_num] end
+            ) * ","
         elseif col_num == ncol(df) && rownumber(row) < nrow(df)
-            csv_data = csv_data * (string(row[col_num]) * "\\n")
+            csv_data = csv_data * (
+                string(
+                    if ismissing(row[col_num]) "" else row[col_num] end
+                ) * "\\n"
+            )
         elseif col_num < ncol(df) && rownumber(row) == nrow(df)
-            csv_data = csv_data * (string(row[col_num]) * ",")
+            csv_data = csv_data * (
+                string(
+                    if ismissing(row[col_num]) "" else row[col_num] end
+                ) * ","
+            )
         elseif col_num == ncol(df) && rownumber(row) == nrow(df)
-            csv_data = csv_data * string(row[col_num])
+            csv_data = csv_data * string(
+                if ismissing(row[col_num]) "" else row[col_num] end
+            )
         end
     end
 

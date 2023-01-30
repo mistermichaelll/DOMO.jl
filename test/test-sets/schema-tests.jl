@@ -85,4 +85,6 @@ null_schema_test_df = DataFrame(
 )
 
 # test string for math friends
-test_csv_string = "Pythagoras,TRUE\\nAlan Turing,TRUE\\nGeorge Boole,FALSE"
+test_csv_string_math = "Pythagoras,TRUE\\nAlan Turing,TRUE\\nGeorge Boole,FALSE"
+# test string for crow friends
+test_csv_string_crows = "Peanut,TRUE,1\\nCindy,,\\n,FALSE,\\nGumbo,TRUE,3\\nFlynn,FALSE,5"
