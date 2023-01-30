@@ -69,7 +69,7 @@ end
 
 ## send the schema to Domo.
 function push_schema_to_domo(dataset_schema)
-    request(
+    response = request(
         "POST",
         "https://api.domo.com/v1/datasets",
         [
