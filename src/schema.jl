@@ -1,7 +1,7 @@
 # function to match Julia's types to Domo's
 #  according to Docs, accepted values are STRING, DECIMAL, LONG, DOUBLE, DATE, and DATETIME.
 function match_domo_types(type)
-    if type == String || type == Union{String, Missing}
+    if type == String || type == Union{String, Missing} || type == Bool || type == Union{Bool, Missing}
         "STRING"
     elseif type in [Int64, Int32] || type in [Union{Int64, Missing}, Union{Int32, Missing}]
         "LONG"
@@ -33,7 +33,7 @@ function create_dataset_schema(df, name, description)
         "schema" => column_schema
     )
 
-    json(schema)
+    return json(schema)
 end
 
 ## create csv structure for dataset to be sent to Domo.
