@@ -1,4 +1,4 @@
-import DOMO: match_domo_types, create_dataset_schema
+import DOMO: match_domo_types, create_dataset_schema, create_csv_structure
 import JSON: json
 import DataFrames: DataFrame
 using Dates
@@ -84,8 +84,7 @@ null_schema_test_df = DataFrame(
     "Approximate Peanuts Eaten" => [1, missing, missing, 3, 5]
 )
 
-create_dataset_schema(
-        null_schema_test_df,
-        "The Crows Outside My Apartment",
-        "A partial list of friends."
-    )
+# test string for math friends
+test_csv_string_math = "Pythagoras,TRUE\nAlan Turing,TRUE\nGeorge Boole,FALSE\n"
+# test string for crow friends
+test_csv_string_crows = "Peanut,TRUE,1\nCindy,,\n,FALSE,\nGumbo,TRUE,3\nFlynn,FALSE,5\n"

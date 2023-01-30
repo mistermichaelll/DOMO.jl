@@ -20,4 +20,7 @@ include("test-sets/schema-tests.jl")
     map(1:length(types)) do type
         @test match_domo_types(types[type]) == expected_types[type]
     end
+    # test whether behavior of csv creator is valid
+    @test create_csv_structure(schema_test_mathematicians_dataset) == test_csv_string_math
+    @test create_csv_structure(null_schema_test_df) == test_csv_string_crows
 end;
