@@ -48,7 +48,7 @@ function create_csv_structure(df)
             csv_data = csv_data * (
                 string(
                     if ismissing(row[col_num]) "" else row[col_num] end
-                ) * "\\n"
+                ) * "\n"
             )
         elseif col_num < ncol(df) && rownumber(row) == nrow(df)
             csv_data = csv_data * (
@@ -59,7 +59,7 @@ function create_csv_structure(df)
         elseif col_num == ncol(df) && rownumber(row) == nrow(df)
             csv_data = csv_data * string(
                 if ismissing(row[col_num]) "" else row[col_num] end
-            )
+            ) * "\n"
         end
     end
 
