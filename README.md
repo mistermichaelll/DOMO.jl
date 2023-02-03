@@ -35,7 +35,7 @@ using DataFrames
 using DOMO
 
 url = "https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv"
-mtcars = CSV.read(download(url), DataFrame)
+mtcars = CSV.read(download(url), DataFrame, types = Dict(1 => String))
 
 DOMO_auth(client_id, client_secret)
 #> Authentication complete.
@@ -43,7 +43,7 @@ DOMO_auth(client_id, client_secret)
 create_dataset(
     mtcars;
     name = "Julia | mtcars",
-    description = "uploading the mtcars dataset from Julia.
+    description = "uploading the mtcars dataset from Julia."
 )
 #> Dataset uploaded to Domo: ID is some-string-of-numbers.
 ```
