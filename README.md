@@ -27,7 +27,7 @@ DOMO_auth(client_id, client_secret)
 ```
 
 ## What can I do with the package?
-Right now, not a ton... 😅 but you can create and replace datasets straight from Julia.
+Right now, not a ton... 😅 but you can create and replace datasets straight from Julia, as well as get a `DataFrame` containing a list of all datasets in your Domo instance.
 
 ```julia
 using CSV
