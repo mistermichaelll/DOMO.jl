@@ -1,5 +1,10 @@
-# function to match Julia's types to Domo's
-#  according to Docs, accepted values are STRING, DECIMAL, LONG, DOUBLE, DATE, and DATETIME.
+"""
+    match_domo_types(type)
+
+This function helps match types in Julia to those accepted by the Domo API.
+
+This is an internal function used by the package, it may come in handy if you're trying to extend the API.
+"""
 function match_domo_types(type)
     if type == String || type == Union{String, Missing} || type == Bool || type == Union{Bool, Missing}
         "STRING"
@@ -14,8 +19,11 @@ function match_domo_types(type)
     end
 end
 
-# function to set up the dataset schema from a dataframe in the proper format for pushing
-#  the result to Domo.
+"""
+    create_dataset_schema(df, name, description)
+
+Creates a dataset schema for a given DataFrame. This is an internal function, but may be useful if you are extending the Domo API in Julia.
+"""
 function create_dataset_schema(df, name, description)
     column_schema = Dict(
         "columns" => map(1:ncol(df)) do column
@@ -36,38 +44,39 @@ function create_dataset_schema(df, name, description)
     return json(schema)
 end
 
-## create csv structure for dataset to be sent to Domo.
+function create_csv_string(row, col_num)
+    csv_string = string(ifelse(ismissing(row[col_num]), "", row[col_num]))
+
+    if occursin(",", csv_string)
+        csv_string = "\"" * csv_string * "\""
+    end
+
+    return csv_string
+end
+
+"""
+    create_csv_structure(df)
+
+This function creates a CSV, in the form of a single string, from a DataFrame to send to Domo.
+"""
 function create_csv_structure(df)
     csv_data = ""
 
     for row in eachrow(df), col_num in 1:ncol(df)
         if col_num < ncol(df) && rownumber(row) < nrow(df)
-            csv_data = csv_data * string(
-                ifelse(ismissing(row[col_num]), "", row[col_num])
-            ) * ","
+            csv_data = csv_data * create_csv_string(row, col_num) * ","
         elseif col_num == ncol(df) && rownumber(row) < nrow(df)
-            csv_data = csv_data * (
-                string(
-                    ifelse(ismissing(row[col_num]), "", row[col_num])
-                ) * "\n"
-            )
+            csv_data = csv_data * create_csv_string(row, col_num) * "\n"
         elseif col_num < ncol(df) && rownumber(row) == nrow(df)
-            csv_data = csv_data * (
-                string(
-                    ifelse(ismissing(row[col_num]), "", row[col_num])
-                ) * ","
-            )
+            csv_data = csv_data * create_csv_string(row, col_num) * ","
         elseif col_num == ncol(df) && rownumber(row) == nrow(df)
-            csv_data = csv_data * string(
-                ifelse(ismissing(row[col_num]), "", row[col_num])
-            ) * "\n"
+            csv_data = csv_data * create_csv_string(row, col_num) * "\n"
         end
     end
 
     return csv_data
 end
 
-## send the schema to Domo.
 function push_schema_to_domo(dataset_schema)
     response = request(
         "POST",

@@ -2,6 +2,19 @@ function create_basic_auth_header(client_id::String, client_secret::String)
     ["Authorization" => "Basic " * base64encode(client_id * ":" * client_secret)]
 end
 
+"""
+    DOMO_auth(client_id, client_secret)
+
+Generate a DOMO access token for the API.
+
+A `client_id` and `client_secret` can be obtained from the [Domo Developer portal](https://developer.domo.com/).
+
+# Examples
+```julia-repl
+julia> DOMO_auth(client_id, client_secret)
+Authentication complete.
+```
+"""
 function DOMO_auth(client_id::String, client_secret::String)
      # this likely would never happen since providing nothing will throw a method error...
      #  and I doubt someone would pass an empty string here...but you never know.
