@@ -36,31 +36,30 @@ function create_dataset_schema(df, name, description)
     return json(schema)
 end
 
+# create a string for the line of the csv.
+function create_csv_string(row, col_num)
+    csv_string = string(ifelse(ismissing(row[col_num]), "", row[col_num]))
+
+    if occursin(",", csv_string)
+        csv_string = "\"" * csv_string * "\""
+    end
+
+    return csv_string
+end
+
 ## create csv structure for dataset to be sent to Domo.
 function create_csv_structure(df)
     csv_data = ""
 
     for row in eachrow(df), col_num in 1:ncol(df)
         if col_num < ncol(df) && rownumber(row) < nrow(df)
-            csv_data = csv_data * string(
-                ifelse(ismissing(row[col_num]), "", row[col_num])
-            ) * ","
+            csv_data = csv_data * create_csv_string(row, col_num) * ","
         elseif col_num == ncol(df) && rownumber(row) < nrow(df)
-            csv_data = csv_data * (
-                string(
-                    ifelse(ismissing(row[col_num]), "", row[col_num])
-                ) * "\n"
-            )
+            csv_data = csv_data * create_csv_string(row, col_num) * "\n"
         elseif col_num < ncol(df) && rownumber(row) == nrow(df)
-            csv_data = csv_data * (
-                string(
-                    ifelse(ismissing(row[col_num]), "", row[col_num])
-                ) * ","
-            )
+            csv_data = csv_data * create_csv_string(row, col_num) * ","
         elseif col_num == ncol(df) && rownumber(row) == nrow(df)
-            csv_data = csv_data * string(
-                ifelse(ismissing(row[col_num]), "", row[col_num])
-            ) * "\n"
+            csv_data = csv_data * create_csv_string(row, col_num) * "\n"
         end
     end
 
