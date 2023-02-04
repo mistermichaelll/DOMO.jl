@@ -77,5 +77,27 @@ function list_datasets(;limit = 50, name = "", offset = 0, owner_id = "", order_
         ["Accept" => "application/json", "Authorization" => "bearer " * access_token]
     )
 
-    return parse_HTTP_response(response)
+    parsed_response = parse_HTTP_response(response)
+
+    datetime_format = "yyyy-mm-ddTHH:MM:SSZ"
+
+    cols = [
+    "id",
+    "name",
+    "description",
+    "rows",
+    "columns",
+    "createdAt",
+    "updatedAt"
+    ]
+
+    dataset_dataframe = map(cols) do id_col
+        if id_col in ["createdAt", "dataCurrentAt", "updatedAt"]
+            (id_col => [DateTime(ds[id_col], datetime_format) for ds in parsed_response])
+        else
+            (id_col => [try ds[id_col] catch KeyError missing end for ds in parsed_response])
+        end
+    end |> DataFrame
+
+    return dataset_dataframe
 end
