@@ -12,5 +12,6 @@ using Dates
 export DOMO_auth
 export create_dataset
 export replace_dataset
+export list_datasets
 
 end
