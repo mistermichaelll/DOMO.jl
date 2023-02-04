@@ -1,5 +1,10 @@
 include("schema.jl")
 
+"""
+    create_dataset(df; name::String = "", description::String = "")
+
+Create a dataset in Domo from an existing DataFrame object.
+"""
 function create_dataset(df; name::String = "", description::String = "")
     if !(@isdefined domo)
         error("Please run the DOMO_auth() function to generate an access token.")
@@ -25,6 +30,11 @@ function create_dataset(df; name::String = "", description::String = "")
     println("Dataset uploaded to Domo: ID is " * pushed_schema["id"])
 end
 
+"""
+    replace_dataset(dataset_id::String, df)
+
+Replace an existing dataset in Domo with a new DataFrame object.
+"""
 function replace_dataset(dataset_id::String, df)
     if !(@isdefined domo)
         error("Please run the DOMO_auth() function to generate an access token.")
@@ -43,6 +53,11 @@ function replace_dataset(dataset_id::String, df)
     println("Dataset update successful.")
 end
 
+"""
+    list_datasets(dataset_id::String, df)
+
+Returns a list of all datasets in the Domo instance as a DataFrame.
+"""
 function list_datasets(;limit = 50, name = "", offset = 0, owner_id = "", order_by = "")
     if !(@isdefined domo)
         error("Please run the DOMO_auth() function to generate an access token.")
