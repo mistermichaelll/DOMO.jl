@@ -4,7 +4,7 @@ include("datasets.jl")
 include("utils.jl")
 
 import HTTP: request, iserror
-import JSON: parse, json
+using JSON3
 import Base64: base64encode
 import DataFrames: DataFrame, nrow, ncol, rownumber, eachrow, eachcol
 using Dates
