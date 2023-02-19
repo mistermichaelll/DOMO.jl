@@ -41,7 +41,7 @@ function create_dataset_schema(df, name, description)
         "schema" => column_schema
     )
 
-    return json(schema)
+    return JSON3.write(schema)
 end
 
 function create_csv_string(row, col_num)
