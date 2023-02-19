@@ -1,5 +1,5 @@
 import DOMO: match_domo_types, create_dataset_schema, create_csv_structure
-import JSON: json
+using JSON3
 import DataFrames: DataFrame
 using Dates
 
@@ -76,7 +76,7 @@ schema_test_nulls = Dict(
             "name" => "Approximate Peanuts Eaten"
         )]
     )
-) |> json
+) |> JSON3.write
 
 null_schema_test_df = DataFrame(
     "Friend" => ["Peanut", "Cindy", missing, "Gumbo", "Flynn"],
