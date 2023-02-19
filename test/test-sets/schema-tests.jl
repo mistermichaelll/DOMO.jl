@@ -52,7 +52,7 @@ schema_test_mathematicians = Dict(
             "name" => "Attending"
         )]
     )
-) |> json
+) |> JSON3.write
 
 schema_test_mathematicians_dataset = DataFrame(
     "Friend" => ["Pythagoras", "Alan Turing", "George Boole"],
