@@ -58,7 +58,7 @@ end
 
 Returns a list of all datasets in the Domo instance as a DataFrame.
 """
-function list_datasets(;limit = 50, name = "", offset = 0, owner_id = "", order_by = "")
+function list_datasets(;limit = 50, name = "", offset = 0, order_by = "")
     if !(@isdefined domo)
         error("Please run the DOMO_auth() function to generate an access token.")
     end
