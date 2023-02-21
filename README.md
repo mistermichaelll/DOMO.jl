@@ -45,9 +45,8 @@ url = "https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f2
 
 mtcars = CSV.read(
     download(url), 
-    DataFrame, 
-    types = Dict(1 => String) # note the specified type here for column 1.
-) 
+    DataFrame
+)
 
 DOMO_auth(client_id, client_secret)
 #> Authentication complete.
