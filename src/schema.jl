@@ -6,15 +6,15 @@ This function helps match types in Julia to those accepted by the Domo API.
 This is an internal function used by the package, it may come in handy if you're trying to extend the API.
 """
 function match_domo_types(type)
-    if type <: AbstractString || type == Union{String, Missing} || type <: Bool || type == Union{Bool, Missing}
+    if type <: AbstractString || type == Union{AbstractString, Missing} || type <: Bool || type == Union{Bool, Missing}
         "STRING"
-    elseif type <: Integer || type in [Union{Int64, Missing}, Union{Int32, Missing}]
+    elseif type <: Integer || type <: Union{Integer, Missing}
         "LONG"
-    elseif type <: AbstractFloat || type in [Union{Float64, Missing}, Union{Float32, Missing}]
+    elseif type <: AbstractFloat || type <: Union{AbstractFloat, Missing}
         "DOUBLE"
-    elseif type <: Dates.Date || type == Union{Dates.Date, Missing}
+    elseif type <: Dates.Date || type <: Union{Dates.Date, Missing}
         "DATE"
-    elseif type <: Dates.DateTime || type == Union{Dates.DateTime, Missing}
+    elseif type <: Dates.DateTime || type <: Union{Dates.DateTime, Missing}
         "DATETIME"
     end
 end
