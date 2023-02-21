@@ -6,7 +6,7 @@ This function helps match types in Julia to those accepted by the Domo API.
 This is an internal function used by the package, it may come in handy if you're trying to extend the API.
 """
 function match_domo_types(type)
-    if type <: AbstractString || type == Union{AbstractString, Missing} || type <: Bool || type == Union{Bool, Missing}
+    if type <: AbstractString || type <: Union{AbstractString, Missing} || type <: Bool || type == Union{Bool, Missing}
         "STRING"
     elseif type <: Integer || type <: Union{Integer, Missing}
         "LONG"
