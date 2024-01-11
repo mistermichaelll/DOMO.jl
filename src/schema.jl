@@ -1,3 +1,5 @@
+using DataFrames: DataFrame
+using CSV
 """
     match_domo_types(type)
 
@@ -44,37 +46,17 @@ function create_dataset_schema(df, name, description)
     return JSON3.write(schema)
 end
 
-function create_csv_string(row, col_num)
-    csv_string = string(ifelse(ismissing(row[col_num]), "", row[col_num]))
+"""
+    dataframe_to_csv
 
-    if occursin(",", csv_string)
-        csv_string = "\"" * csv_string * "\""
-    end
-
+Convert a Julia DataFrame to a CSV string for the API.
+"""
+function dataframe_to_csv(df::DataFrame)
+    io = IOBuffer()
+    io_file = CSV.write(io, df; header = false)
+    csv_string = String(take!(io_file))
+    close(io)
     return csv_string
-end
-
-"""
-    create_csv_structure(df)
-
-This function creates a CSV, in the form of a single string, from a DataFrame to send to Domo.
-"""
-function create_csv_structure(df)
-    csv_data = ""
-
-    for row in eachrow(df), col_num in 1:ncol(df)
-        if col_num < ncol(df) && rownumber(row) < nrow(df)
-            csv_data = csv_data * create_csv_string(row, col_num) * ","
-        elseif col_num == ncol(df) && rownumber(row) < nrow(df)
-            csv_data = csv_data * create_csv_string(row, col_num) * "\n"
-        elseif col_num < ncol(df) && rownumber(row) == nrow(df)
-            csv_data = csv_data * create_csv_string(row, col_num) * ","
-        elseif col_num == ncol(df) && rownumber(row) == nrow(df)
-            csv_data = csv_data * create_csv_string(row, col_num) * "\n"
-        end
-    end
-
-    return csv_data
 end
 
 function push_schema_to_domo(dataset_schema)
