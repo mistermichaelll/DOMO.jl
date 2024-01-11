@@ -1,4 +1,4 @@
-import DOMO: match_domo_types, create_dataset_schema, create_csv_structure
+import DOMO: match_domo_types, create_dataset_schema, dataframe_to_csv
 using JSON3
 import DataFrames: DataFrame
 using Dates
